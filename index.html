@@ -1099,21 +1099,7 @@
     <div class="footer-cta-btns">
       <a href="mailto:info@lagomterrace.bz" class="btn-primary">🍽️ Book a Table</a>
       <a href="tel:+5010000000" class="btn-call">📞 Call to Order</a>
-      <form action="https://formspree.io/f/https://formspree.io/f/mwvzpogj" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required>
-
-<input type="email" name="email" placeholder="Your Email" required>
-
-<input type="date" name="date" required>
-
-<input type="time" name="time" required>
-
-<textarea name="message" placeholder="Special Requests"></textarea>
-        <button type="submit">Reserve Now</button>
-        <input type="hidden" name="_next" value="https://jose1234-design.github.io/Lagomterrace/thankyou.html">
-    </div>
-  </div>
-</section>
+    
 
 <!-- FOOTER -->
 <footer>
@@ -1168,5 +1154,182 @@
     observer.observe(el);
   });
 </script>
+<!-- RESERVATION SECTION -->
+<section id="reservation-section">
+  <div class="reservation-container">
+    <h2>Reserve Your Table</h2>
+    <p>Book your rooftop experience at Lagom Terrace.</p>
+
+    <form id="reservationForm">
+      <div class="form-grid">
+
+        <input type="text" name="name" placeholder="Full Name" required>
+
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+
+        <input type="number" name="guests" placeholder="Number of Guests" required>
+
+        <input type="date" name="date" required>
+
+        <input type="time" name="time" required>
+
+        <textarea name="message" placeholder="Special Requests"></textarea>
+
+      </div>
+
+      <button type="submit">Reserve Now</button>
+    </form>
+  </div>
+</section>
+
+<!-- SUCCESS POPUP -->
+<div id="successPopup" class="popup">
+  <div class="popup-content">
+    <h3>Reservation Sent!</h3>
+    <p>Thank you for choosing Lagom Terrace.</p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+</div>
+
+<style>
+#reservation-section {
+  padding: 100px 20px;
+  background: #161412;
+}
+
+.reservation-container {
+  max-width: 700px;
+  margin: auto;
+  background: rgba(255,255,255,0.03);
+  padding: 50px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+}
+
+.reservation-container h2 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #F2C96E;
+}
+
+.reservation-container p {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #B89A7A;
+}
+
+.form-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.form-grid input,
+.form-grid textarea {
+  width: 100%;
+  padding: 16px;
+  background: #1f1b18;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+}
+
+.form-grid textarea {
+  min-height: 120px;
+  resize: none;
+}
+
+#reservationForm button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 18px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg,#E8621A,#C94F0C);
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#reservationForm button:hover {
+  transform: translateY(-2px);
+}
+
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.popup-content {
+  background: #1f1b18;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+.popup-content h3 {
+  color: #F2C96E;
+  margin-bottom: 15px;
+}
+
+.popup-content p {
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.popup-content button {
+  background: #E8621A;
+  border: none;
+  padding: 12px 24px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+</style>
+
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbzCOlr03_rHMRBVxSP9q594Hk6j9ppOzQ9pKLVj0_9ryvMXQtrHvUode9GN-55QFPaQ/exec";
+
+document.getElementById("reservationForm")
+.addEventListener("submit", async function(e){
+
+  e.preventDefault();
+
+  const formData = new FormData(this);
+
+  const data = Object.fromEntries(formData.entries());
+
+  try {
+
+    await fetch(scriptURL, {
+      method: "POST",
+      body: JSON.stringify(data)
+    });
+
+    document.getElementById("successPopup").style.display = "flex";
+
+    this.reset();
+
+  } catch(error) {
+    alert("Something went wrong.");
+  }
+});
+
+function closePopup() {
+  document.getElementById("successPopup").style.display = "none";
+}
+</script>
+
 </body>
 </html>
