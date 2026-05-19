@@ -648,6 +648,112 @@
   .footer-links a { font-size: 0.8rem; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
   .footer-links a:hover { color: var(--pale-gold); }
 
+  /* ── BOOKING FORM ── */
+  #reserve {
+    background: linear-gradient(180deg, #0f0c09 0%, var(--dark-wood) 100%);
+    padding: 100px 60px;
+    position: relative;
+  }
+  #reserve::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(to right, transparent, var(--warm-gold), transparent);
+  }
+  .reserve-inner {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .reserve-header { text-align: center; margin-bottom: 52px; }
+  .booking-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--warm-gold);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,168,67,0.22);
+    border-radius: 3px;
+    padding: 14px 18px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    color: var(--text-light);
+    outline: none;
+    transition: border-color 0.25s, background 0.25s;
+    width: 100%;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(184,154,122,0.5); }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--warm-gold);
+    background: rgba(255,255,255,0.07);
+  }
+  .form-group select option { background: var(--dark-wood); color: var(--text-light); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-submit-row {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .form-submit-row button {
+    width: 100%;
+    padding: 18px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+  }
+  .form-note {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: center;
+    font-style: italic;
+  }
+  /* Status messages */
+  #booking-status {
+    display: none;
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 20px 28px;
+    border-radius: 3px;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  #booking-status.success {
+    display: block;
+    background: rgba(80,200,100,0.1);
+    border: 1px solid rgba(80,200,100,0.35);
+    color: #7fe89a;
+  }
+  #booking-status.error {
+    display: block;
+    background: rgba(232,98,26,0.1);
+    border: 1px solid rgba(232,98,26,0.4);
+    color: var(--pale-gold);
+  }
+  .btn-loading { opacity: 0.7; pointer-events: none; }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     nav { padding: 18px 24px; }
@@ -661,6 +767,11 @@
     footer { grid-template-columns: 1fr; text-align: center; }
     .footer-links { justify-content: center; }
     .footer-right { text-align: center; }
+    #reserve { padding: 70px 24px; }
+    .booking-form { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: 1; }
+    .form-submit-row { grid-column: 1; }
+    #booking-status { grid-column: 1; }
   }
 </style>
 </head>
@@ -674,7 +785,7 @@
     <li><a href="#features">Experience</a></li>
     <li><a href="#menu">Menu</a></li>
     <li><a href="#atmosphere">Hours</a></li>
-    <li><a href="#footer-cta" class="nav-cta">Reserve Now</a></li>
+    <li><a href="#reserve" class="nav-cta">Reserve Now</a></li>
   </ul>
 </nav>
 
@@ -688,7 +799,7 @@
     <h1 class="hero-headline">Savor the <em>Flavors,</em><br>Soak in the Views.</h1>
     <p class="hero-sub">Experience authentic Belizean cuisine and signature cocktails at the city's most coveted rooftop. Where unforgettable sunsets meet even better company.</p>
     <div class="hero-btns">
-      <a href="#footer-cta" class="btn-primary">🍽️ Reserve Your Table</a>
+      <a href="#reserve" class="btn-primary">🍽️ Reserve Your Table</a>
       <a href="#menu" class="btn-secondary">View Our Menu</a>
     </div>
   </div>
@@ -1090,6 +1201,85 @@
   </div>
 </section>
 
+<!-- RESERVATION FORM -->
+<section id="reserve">
+  <div class="reserve-inner">
+    <div class="reserve-header">
+      <span class="section-tag">🍽️ Make a Reservation</span>
+      <h2 class="section-title">Book Your <em>Table</em></h2>
+      <div class="divider" style="margin: 20px auto;"></div>
+      <p class="section-sub">Secure your spot on Belize City's most coveted rooftop. We'll confirm your reservation within a few hours.</p>
+    </div>
+
+    <div class="booking-form" id="bookingForm">
+
+      <div class="form-group">
+        <label for="res-name">Full Name</label>
+        <input type="text" id="res-name" placeholder="e.g. Maria Rodriguez" required>
+      </div>
+
+      <div class="form-group">
+        <label for="res-phone">Phone Number</label>
+        <input type="tel" id="res-phone" placeholder="e.g. +501 600-0000" required>
+      </div>
+
+      <div class="form-group">
+        <label for="res-guests">Number of Guests</label>
+        <select id="res-guests" required>
+          <option value="" disabled selected>Select party size</option>
+          <option value="1">1 Guest</option>
+          <option value="2">2 Guests</option>
+          <option value="3">3 Guests</option>
+          <option value="4">4 Guests</option>
+          <option value="5">5 Guests</option>
+          <option value="6">6 Guests</option>
+          <option value="7–10">7–10 Guests</option>
+          <option value="10+">10+ Guests (Large Group)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="res-date">Preferred Date</label>
+        <input type="date" id="res-date" required>
+      </div>
+
+      <div class="form-group full">
+        <label for="res-time">Preferred Time</label>
+        <select id="res-time" required>
+          <option value="" disabled selected>Select a time</option>
+          <option value="11:00 AM">11:00 AM</option>
+          <option value="12:00 PM">12:00 PM</option>
+          <option value="1:00 PM">1:00 PM</option>
+          <option value="2:00 PM">2:00 PM</option>
+          <option value="3:00 PM">3:00 PM</option>
+          <option value="4:00 PM">4:00 PM</option>
+          <option value="5:00 PM">5:00 PM</option>
+          <option value="6:00 PM">6:00 PM</option>
+          <option value="7:00 PM">7:00 PM</option>
+          <option value="8:00 PM">8:00 PM</option>
+          <option value="9:00 PM">9:00 PM</option>
+          <option value="10:00 PM">10:00 PM</option>
+        </select>
+      </div>
+
+      <div class="form-group full">
+        <label for="res-message">Special Requests (Optional)</label>
+        <textarea id="res-message" placeholder="Dietary requirements, occasion, seating preferences…"></textarea>
+      </div>
+
+      <div id="booking-status"></div>
+
+      <div class="form-submit-row">
+        <button class="btn-primary" id="submitBtn" onclick="submitReservation()">
+          🍽️ Confirm Reservation
+        </button>
+        <p class="form-note">We're open Tuesday – Saturday, 11:00 AM – 11:30 PM. Reservations are not accepted for Sundays or Mondays.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER CTA -->
 <section id="footer-cta">
   <div class="footer-cta-content">
@@ -1097,7 +1287,7 @@
     <h2 class="footer-cta-title">Your Table is<br><em>Waiting.</em></h2>
     <p class="footer-cta-sub">The view is stunning, the food is incredible, and the good times are guaranteed. All that's missing is you — book ahead and make it a night to remember.</p>
     <div class="footer-cta-btns">
-      <a href="mailto:info@lagomterrace.bz" class="btn-primary">🍽️ Book a Table</a>
+      <a href="#reserve" class="btn-primary">🍽️ Book a Table</a>
       <a href="tel:+5010000000" class="btn-call">📞 Call to Order</a>
     </div>
   </div>
@@ -1119,7 +1309,7 @@
       <li><a href="#hero">Home</a></li>
       <li><a href="#menu">Menu</a></li>
       <li><a href="#reviews">Reviews</a></li>
-      <li><a href="#footer-cta">Reserve</a></li>
+      <li><a href="#reserve">Reserve</a></li>
     </ul>
   </div>
 </footer>
@@ -1154,6 +1344,96 @@
     el.style.transform = 'translateY(24px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
+  });
+  // ── RESERVATION FORM ──
+  // ⚠️  REPLACE THESE TWO VALUES BEFORE GOING LIVE
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxTcJ6J-NZxjHvCMPGuFJCj4jBWuANjj6XxZRUsk63cSHUUzgSxPzK8fPPTaftjp_z-/exec';
+  const FORMSPREE_URL   = 'https://formspree.io/f/mwvzpogj';
+
+  async function submitReservation() {
+    const btn    = document.getElementById('submitBtn');
+    const status = document.getElementById('booking-status');
+
+    // Gather values
+    const name    = document.getElementById('res-name').value.trim();
+    const phone   = document.getElementById('res-phone').value.trim();
+    const guests  = document.getElementById('res-guests').value;
+    const date    = document.getElementById('res-date').value;
+    const time    = document.getElementById('res-time').value;
+    const message = document.getElementById('res-message').value.trim();
+
+    // Basic validation
+    if (!name || !phone || !guests || !date || !time) {
+      status.className = 'error';
+      status.textContent = '⚠️ Please fill in all required fields before submitting.';
+      status.style.display = 'block';
+      return;
+    }
+
+    // Disable button while submitting
+    btn.classList.add('btn-loading');
+    btn.textContent = '⏳ Sending…';
+    status.style.display = 'none';
+
+    const payload = { name, phone, guests, date, time, message };
+
+    try {
+      // 1️⃣  Send to Google Apps Script → Google Sheets
+      const sheetsPromise = fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' }, // avoids CORS preflight
+        body: JSON.stringify(payload)
+      });
+
+      // 2️⃣  Send to Formspree → email notification
+      const formspreePromise = fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name, phone,
+          guests,
+          date, time,
+          message: message || '(none)',
+          _subject: `New Reservation – ${name} (${guests} guests) on ${date}`
+        })
+      });
+
+      // Wait for both; treat partial success gracefully
+      const [sheetsRes, formspreeRes] = await Promise.allSettled([sheetsPromise, formspreePromise]);
+
+      const sheetsOK    = sheetsRes.status === 'fulfilled' && sheetsRes.value.ok;
+      const formspreeOK = formspreeRes.status === 'fulfilled' && formspreeRes.value.ok;
+
+      if (sheetsOK || formspreeOK) {
+        status.className = 'success';
+        status.innerHTML = '✅ <strong>Reservation received!</strong> We\'ll confirm your table within a few hours. See you soon! 🌅';
+        status.style.display = 'block';
+        // Clear the form
+        ['res-name','res-phone','res-guests','res-date','res-time','res-message'].forEach(id => {
+          document.getElementById(id).value = '';
+        });
+        document.getElementById('res-guests').selectedIndex = 0;
+        document.getElementById('res-time').selectedIndex = 0;
+      } else {
+        throw new Error('Both endpoints failed');
+      }
+    } catch (err) {
+      status.className = 'error';
+      status.innerHTML = '❌ Something went wrong. Please call us directly or try again shortly.';
+      status.style.display = 'block';
+    } finally {
+      btn.classList.remove('btn-loading');
+      btn.textContent = '🍽️ Confirm Reservation';
+    }
+  }
+
+  // Set min date to today so past dates can't be picked
+  document.addEventListener('DOMContentLoaded', () => {
+    const dateInput = document.getElementById('res-date');
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.setAttribute('min', today);
+    }
   });
 </script>
 </body>
