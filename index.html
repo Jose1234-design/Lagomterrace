@@ -957,9 +957,10 @@ footer {
       <button class="tab-btn" onclick="showTab('drinks', this)">Drinks</button>
       <button class="tab-btn" onclick="showTab('shots', this)">Shots &amp; Draft</button>
       <button class="tab-btn" onclick="showTab('liquor', this)">Liquor</button>
+      <button class="tab-btn" onclick="showTab('nonalcoholic', this)">Non-Alcoholic</button>
     </div>
 
-    <!-- ── APPETIZERS (prices updated from PDF: Large ceviche $36, Mix 2 options $36, Mix 3 $49, etc) ── -->
+    <!-- ── APPETIZERS ── -->
     <div id="tab-appetizers" class="menu-panel active">
       <div class="menu-grid">
         <div class="menu-section-head">Starters</div>
@@ -993,7 +994,7 @@ footer {
       </div>
     </div>
 
-    <!-- ── MAINS (updated prices: Quesadilla cheese $15, chicken $22, shrimp $28, arrachera $29. Alfredo with shrimp $28, etc) ── -->
+    <!-- ── MAINS ── -->
     <div id="tab-mains" class="menu-panel">
       <div class="menu-grid">
         <div class="menu-section-head">Burgers (Your choice between fried/grilled chicken breast or grilled beef patties)</div>
@@ -1049,7 +1050,7 @@ footer {
       </div>
     </div>
 
-    <!-- ── DRINKS (prices verified against PDF: Panty Ripper $10, liter drinks $14-22, batches $32-37) ── -->
+    <!-- ── DRINKS ── -->
     <div id="tab-drinks" class="menu-panel">
       <div class="menu-grid">
         <div class="menu-section-head">Cocktails</div>
@@ -1109,7 +1110,7 @@ footer {
       </div>
     </div>
 
-    <!-- ── SHOTS & DRAFT (prices verified) ── -->
+    <!-- ── SHOTS & DRAFT ── -->
     <div id="tab-shots" class="menu-panel">
       <div class="menu-grid">
         <div class="menu-section-head">Signature Shots</div>
@@ -1128,7 +1129,7 @@ footer {
       </div>
     </div>
 
-    <!-- ── LIQUOR (prices per PDF) ── -->
+    <!-- ── LIQUOR ── -->
     <div id="tab-liquor" class="menu-panel">
       <div class="menu-grid">
         <div class="menu-section-head">Local Rum & Spirits</div>
@@ -1148,6 +1149,27 @@ footer {
         <div class="menu-item"><span class="menu-item-name">Flor de Caña 4/7/12/18</span><span class="menu-item-dots"></span><span class="menu-item-price">$10–$22</span></div>
         <div class="menu-item"><span class="menu-item-name">Zacapa 23 / Kraken</span><span class="menu-item-dots"></span><span class="menu-item-price">$27 / $16</span></div>
         <div class="menu-item"><span class="menu-item-name">Macallan / Glenfiddich / Chivas Regal</span><span class="menu-item-dots"></span><span class="menu-item-price">$22–$25</span></div>
+      </div>
+    </div>
+
+    <!-- ⭐ NEW: NON-ALCOHOLIC DRINKS SUBSECTION ⭐ -->
+    <div id="tab-nonalcoholic" class="menu-panel">
+      <div class="menu-grid">
+        <div class="menu-section-head">Refreshing Zero-Proof Drinks</div>
+        <div class="menu-item"><span class="menu-item-name">Sparkling Water</span><span class="menu-item-dots"></span><span class="menu-item-price">$3</span></div>
+        <div class="menu-item"><span class="menu-item-name">Bottled Water</span><span class="menu-item-dots"></span><span class="menu-item-price">$2.50</span></div>
+        <div class="menu-item"><span class="menu-item-name">Sodas (Coke, Diet Coke, Sprite, Ginger Ale)</span><span class="menu-item-dots"></span><span class="menu-item-price">$2.50</span></div>
+        <div class="menu-item"><span class="menu-item-name">Natural Juices (Orange, Pineapple, Cranberry)</span><span class="menu-item-dots"></span><span class="menu-item-price">$4</span></div>
+        <div class="menu-item"><span class="menu-item-name">Fresh Lemonade</span><span class="menu-item-dots"></span><span class="menu-item-price">$4.50</span></div>
+        <div class="menu-item"><span class="menu-item-name">Iced Tea</span><span class="menu-item-dots"></span><span class="menu-item-price">$3.50</span></div>
+        <div class="menu-item"><span class="menu-item-name">Milk Tea</span><span class="menu-item-dots"></span><span class="menu-item-price">$8</span></div>
+        <div class="menu-item"><span class="menu-item-name">Iced Coffee</span><span class="menu-item-dots"></span><span class="menu-item-price">$10</span></div>
+        <div class="menu-item"><span class="menu-item-name">Seasonal Iced Coffee (Coconut / Vanilla)</span><span class="menu-item-dots"></span><span class="menu-item-price">$12</span></div>
+        <div class="menu-item"><span class="menu-item-name">Frozen Coffee (Blended)</span><span class="menu-item-dots"></span><span class="menu-item-price">$12</span></div>
+        <div class="menu-item"><span class="menu-item-name">Virgin Mojito (Fresh mint, lime, soda)</span><span class="menu-item-dots"></span><span class="menu-item-price">$7</span></div>
+        <div class="menu-item"><span class="menu-item-name">Virgin Piña Colada (Creamy coconut & pineapple)</span><span class="menu-item-dots"></span><span class="menu-item-price">$8</span></div>
+        <div class="menu-item"><span class="menu-item-name">Tropical Fruit Punch</span><span class="menu-item-dots"></span><span class="menu-item-price">$6</span></div>
+        <div class="menu-note">*All non-alcoholic drinks are crafted with the same care as our signature cocktails — no spirits, just pure refreshment.</div>
       </div>
     </div>
 
@@ -1301,9 +1323,6 @@ footer {
   </div>
 </footer>
 
-<!-- ══════════════════════════════════════════════════════
-     JAVASCRIPT — all original logic preserved & cleaned
-══════════════════════════════════════════════════════ -->
 <script>
   /* ── Nav scroll effect ── */
   const navbar = document.getElementById('navbar');
@@ -1311,13 +1330,12 @@ footer {
     navbar.classList.toggle('scrolled', window.scrollY > 60);
   });
 
-  /* ── Menu tabs ──
-     Signature fixed: button reference passed as param instead of
-     relying on the ambient `event` object (more reliable)       */
+  /* ── Menu tabs ── */
   function showTab(tabId, btn) {
     document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + tabId).classList.add('active');
+    const targetPanel = document.getElementById('tab-' + tabId);
+    if (targetPanel) targetPanel.classList.add('active');
     btn.classList.add('active');
   }
 
@@ -1326,7 +1344,7 @@ footer {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-        revealObserver.unobserve(e.target); // fire once
+        revealObserver.unobserve(e.target);
       }
     });
   }, { threshold: 0.12 });
@@ -1341,9 +1359,7 @@ footer {
     }
   });
 
-  /* ── Reservation form submission ──
-     Sends to Google Apps Script (→ Sheets) AND Formspree (→ email).
-     ⚠️  Replace the two URLs below before going live.              */
+  /* ── Reservation form submission ── */
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxjfcQeX1H9YToe09P3dVJhsAgxAflQuKlF6-0PJREDKsWa7akxuq68IinZAS54QYfS4A/exec';
   const FORMSPREE_URL   = 'https://formspree.io/f/mojzdgjn';
 
@@ -1358,7 +1374,6 @@ footer {
     const time    = document.getElementById('res-time').value;
     const message = document.getElementById('res-message').value.trim();
 
-    /* Validation */
     if (!name || !phone || !guests || !date || !time) {
       status.className = 'error';
       status.textContent = '⚠️ Please fill in all required fields before submitting.';
@@ -1366,7 +1381,6 @@ footer {
       return;
     }
 
-    /* Loading state */
     btn.classList.add('btn-loading');
     btn.textContent = '⏳ Sending…';
     status.style.display = 'none';
@@ -1374,14 +1388,12 @@ footer {
     const payload = { name, phone, guests, date, time, message };
 
     try {
-      /* 1️⃣  Google Sheets via Apps Script */
       const sheetsPromise = fetch(APPS_SCRIPT_URL, {
         method:  'POST',
-        headers: { 'Content-Type': 'text/plain' }, // avoids CORS preflight
+        headers: { 'Content-Type': 'text/plain' },
         body:    JSON.stringify(payload)
       });
 
-      /* 2️⃣  Formspree email notification */
       const formspreePromise = fetch(FORMSPREE_URL, {
         method:  'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -1393,7 +1405,6 @@ footer {
       });
 
       const [sheetsRes, formspreeRes] = await Promise.allSettled([sheetsPromise, formspreePromise]);
-
       const sheetsOK    = sheetsRes.status    === 'fulfilled' && sheetsRes.value.ok;
       const formspreeOK = formspreeRes.status === 'fulfilled' && formspreeRes.value.ok;
 
@@ -1401,7 +1412,6 @@ footer {
         status.className = 'success';
         status.innerHTML = '✅ <strong>Reservation received!</strong> We\'ll confirm your table within a few hours. See you soon! 🌅';
         status.style.display = 'block';
-        /* Clear form */
         ['res-name','res-phone','res-date','res-message'].forEach(id => {
           document.getElementById(id).value = '';
         });
